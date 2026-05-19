@@ -73,7 +73,7 @@ function confirmDel(tab: string, row: any) {
     <h1 class="page-title">🏷️ จัดการหมวดหมู่</h1>
 
     <TabView>
-      <TabPanel header="📥 หมวดหมู่รายรับ">
+      <TabPanel value="0" header="📥 หมวดหมู่รายรับ">
         <div class="flex justify-end mb-4"><Button label="+ เพิ่ม" icon="pi pi-plus" size="small" @click="openCreate('income')" /></div>
         <DataTable :value="incomeCategories" :loading="loading" class="text-sm" stripedRows emptyMessage="ยังไม่มีหมวดหมู่">
           <Column field="name" header="ชื่อ" :sortable="true" />
@@ -81,7 +81,7 @@ function confirmDel(tab: string, row: any) {
           <Column header="จัดการ" style="width:100px"><template #body="{data}"><div class="flex gap-1"><Button icon="pi pi-pencil" severity="info" text rounded size="small" @click="openEdit('income', data)" /><Button icon="pi pi-trash" severity="danger" text rounded size="small" @click="confirmDel('income', data)" /></div></template></Column>
         </DataTable>
       </TabPanel>
-      <TabPanel header="📤 หมวดหมู่รายจ่าย">
+      <TabPanel value="1" header="📤 หมวดหมู่รายจ่าย">
         <div class="flex justify-end mb-4"><Button label="+ เพิ่ม" icon="pi pi-plus" size="small" @click="openCreate('expense')" /></div>
         <DataTable :value="expenseCategories" :loading="loading" class="text-sm" stripedRows emptyMessage="ยังไม่มีหมวดหมู่">
           <Column field="name" header="ชื่อ" :sortable="true" />
