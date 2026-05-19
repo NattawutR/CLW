@@ -11,7 +11,14 @@ export const USERS: Profile[] = [
   { id: '55555555-5555-5555-5555-555555555555', full_name: 'แม่', role: 'owner', created_at: '', updated_at: '' },
 ]
 
-const ADMIN_PIN = '1234' // เปลี่ยนได้ภายหลัง
+// ========== Custom PINs ==========
+export const USER_PINS: Record<string, string> = {
+  '11111111-1111-1111-1111-111111111111': 'P@ssw0rd',  // ฟิล์ม (Admin)
+  '22222222-2222-2222-2222-222222222222': '4444',      // ฟ้า (Co-Admin)
+  '33333333-3333-3333-3333-333333333333': '5555',      // พี่กอล์ฟ (Co-Admin)
+  '44444444-4444-4444-4444-444444444444': '6666',      // พี่เอฟ (Co-Admin)
+  '55555555-5555-5555-5555-555555555555': '880206',    // แม่ (Owner)
+}
 
 export const useAuthStore = defineStore('auth', () => {
   const profile = ref<Profile | null>(null)
@@ -47,9 +54,9 @@ export const useAuthStore = defineStore('auth', () => {
     const found = USERS.find(u => u.id === userId)
     if (!found) throw new Error('ไม่พบผู้ใช้')
 
-    // Admin ต้องกรอก PIN
-    if (found.role === 'admin') {
-      if (!pin || pin !== ADMIN_PIN) {
+    const requiredPin = USER_PINS[userId]
+    if (requiredPin) {
+      if (!pin || pin !== requiredPin) {
         throw new Error('รหัสผ่านไม่ถูกต้อง')
       }
     }

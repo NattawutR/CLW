@@ -127,10 +127,10 @@ async function handleLogin() {
         </button>
       </div>
 
-      <!-- Admin PIN -->
-      <div v-if="isAdminSelected" class="mb-5 animate-fade-in-up">
+      <!-- User PIN -->
+      <div v-if="selectedUserId" class="mb-5 animate-fade-in-up">
         <label class="block text-sm font-medium text-surface-700 mb-1.5"
-          >🔒 รหัสผ่าน Admin</label
+          >🔒 รหัสผ่านเข้าใช้งาน</label
         >
         <Password
           v-model="pin"
@@ -145,8 +145,8 @@ async function handleLogin() {
 
       <!-- Login Button -->
       <Button
-        :label="isAdminSelected ? 'เข้าสู่ระบบ (Admin)' : 'เข้าสู่ระบบ'"
-        :icon="isAdminSelected ? 'pi pi-lock' : 'pi pi-sign-in'"
+        :label="selectedUserId ? `เข้าสู่ระบบ (${selectedUser?.full_name})` : 'เข้าสู่ระบบ'"
+        icon="pi pi-lock"
         class="w-full !py-3 !text-base"
         :loading="loading"
         :disabled="!selectedUserId"
